@@ -134,3 +134,116 @@ article h2 a:hover { text-decoration: underline; }
     background: #2980b9;
     color: #fff;
 }
+/* ---------- Commentaires ---------- */
+.back-link {
+    margin-top: 2rem;
+}
+.back-link a {
+    color: #2980b9;
+    text-decoration: none;
+}
+.back-link a:hover { text-decoration: underline; }
+
+.comments {
+    margin-top: 3rem;
+}
+
+.comments h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.comment {
+    background: #fff;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    border-left: 3px solid #2980b9;
+}
+
+.comment-head {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+}
+
+.comment-date {
+    color: #7f8c8d;
+    font-size: 0.85rem;
+}
+
+.comment-form-title {
+    margin-top: 2.5rem;
+}
+
+.comment-form {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+}
+
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form textarea {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.comment-form input:focus,
+.comment-form textarea:focus {
+    outline: none;
+    border-color: #2980b9;
+}
+
+.comment-form button {
+    padding: 0.7rem 1.5rem;
+    background: #2980b9;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.comment-form button:hover {
+    background: #21618c;
+}
+
+.field-error,
+.form-errors {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+}
+
+.form-errors {
+    background: #fdecea;
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.form-errors ul,
+.field-error ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
