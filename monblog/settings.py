@@ -134,3 +134,8 @@ MAILERS = {
 # Redirections auth
 LOGIN_REDIRECT_URL = '/'          # après connexion → accueil
 LOGOUT_REDIRECT_URL = '/'         # après déconnexion → accueil
+
+
+# Médias (uploads)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

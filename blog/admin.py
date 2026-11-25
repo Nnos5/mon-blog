@@ -15,7 +15,8 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ('titre', 'contenu', 'auteur_username')
     prepopulated_fields = {'slug': ('titre',)}
     date_hierarchy = 'date_publication'
-
+    fields = ('titre', 'slug', 'contenu', 'image', 'auteur', 'categorie', 'publie')
+    
 @admin.register(Commentaire)
 class CommentaireAdmin(admin.ModelAdmin):
     list_display = ('nom', 'article', 'date_creation', 'approuve')
