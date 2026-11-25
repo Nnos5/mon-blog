@@ -2,7 +2,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import Article
-from .forms import CommentaireForm
+from .forms import CommentaireForm, ArticleForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+from django.utils.text import slugify
+
 
 def article_list(request):
     query = request.GET.get('q', '').strip()
@@ -60,3 +65,21 @@ def article_detail(request, slug):
         'commentaires': commentaires,
         'form': form,
     })
+
+
+class ArticleCreateView(LoginRequiredMixin, CreateView):
+    model = Article
+    form_class = ArticleForm
+    template_name = 'blog/article_form.html'
+    success_url = reverse_lazy('blog:article_list')
+
+    def form_valid(self, form):
+        # Génère un slug unique à partir du titre
+        base_slug = slugify(form.cleaned_data['titre'])
+        slug = base_slug
+        counter = 1
+        while Article.objects.filter(slug=slug).exists():
+            slug = f"{base_slug}-{counter}"
+            counter += 1
+        form.instance.slug = slug
+        return super().form_valid(form)

@@ -284,3 +284,17 @@ header {
 .link-btn:hover {
     color: #fff;
 }
+
+.new-article-btn {
+    background: #27ae60;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #fff !important;
+    font-weight: 600;
+}
+
+.new-article-btn:hover {
+    background: #219150;
+    text-decoration: none !important;
+}

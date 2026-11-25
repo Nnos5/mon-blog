@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Nouvel article — Mon Blog{% endblock %}
+
+{% block content %}
+<h1>Nouvel article</h1>
+
+<form method="post" class="comment-form">
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+        <div class="form-errors">{{ form.non_field_errors }}</div>
+    {% endif %}
+
+    {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}<div class="field-error">{{ field.errors }}</div>{% endif %}
+        </div>
+    {% endfor %}
+
+    <button type="submit">Publier</button>
+    <a href="{% url 'blog:article_list' %}" class="back-btn" style="margin-left:1rem;">Annuler</a>
+</form>
+{% endblock %}

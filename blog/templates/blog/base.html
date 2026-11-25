@@ -10,17 +10,18 @@
    <header>
     <a href="{% url 'blog:article_list' %}">📝 Mon Blog</a>
 
-    <nav class="user-nav">
-        {% if user.is_authenticated %}
-            <span>👤 {{ user.username }}</span>
-            <form method="post" action="{% url 'logout' %}" style="display:inline;">
-                {% csrf_token %}
-                <button type="submit" class="link-btn">Déconnexion</button>
-            </form>
-        {% else %}
-            <a href="{% url 'login' %}">Connexion</a>
-        {% endif %}
-    </nav>
+   <nav class="user-nav">
+    {% if user.is_authenticated %}
+        <a href="{% url 'blog:article_create' %}" class="new-article-btn">➕ Nouvel article</a>
+        <span>👤 {{ user.username }}</span>
+        <form method="post" action="{% url 'logout' %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="link-btn">Déconnexion</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">Connexion</a>
+    {% endif %}
+</nav>
 </header>
 
     <main>
