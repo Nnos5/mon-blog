@@ -12,7 +12,7 @@ class CategorieAdmin(admin.ModelAdmin):
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('titre', 'auteur', 'categorie', 'date_publication', 'publie')
     list_filter = ('publie', 'categorie', 'date_publication')
-    search_fields = ('titre', 'contenu', 'auteur')
+    search_fields = ('titre', 'contenu', 'auteur_username')
     prepopulated_fields = {'slug': ('titre',)}
     date_hierarchy = 'date_publication'
 

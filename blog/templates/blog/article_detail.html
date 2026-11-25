@@ -3,27 +3,40 @@
 {% block title %}{{ article.titre }} — Mon Blog{% endblock %}
 
 {% block content %}
-<article>
-    <h1>{{ article.titre }}</h1>
-    <p class="meta">
-        Par {{ article.auteur }} · {{ article.date_publication|date:"d/m/Y" }}
-        {% if article.categorie %} · {{ article.categorie.nom }}{% endif %}
+<article style="animation: none;">
+    <h1 style="font-size:2rem;">{{ article.titre }}</h1>
+    <p class="meta" style="margin-bottom:1.5rem;">
+        <span>✍️ {{ article.auteur.username }}</span>
+        <span>·</span>
+        <span>📅 {{ article.date_publication|date:"d M Y" }}</span>
+        {% if article.categorie %}
+            <span>·</span>
+            <span class="badge">{{ article.categorie.nom }}</span>
+        {% endif %}
     </p>
-    <div>{{ article.contenu|linebreaks }}</div>
+
+    <div style="font-size:1.05rem; line-height:1.8;">{{ article.contenu|linebreaks }}</div>
+
+    {% if user.is_authenticated and user == article.auteur %}
+        <div class="article-actions" style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+            <a href="{% url 'blog:article_update' article.slug %}" class="back-btn">✏️ Modifier</a>
+            <a href="{% url 'blog:article_delete' article.slug %}" class="btn-danger-link">🗑️ Supprimer</a>
+        </div>
+    {% endif %}
 </article>
 
-<p class="back-link">
-    <a href="{% url 'blog:article_list' %}">← Retour aux articles</a>
+<p style="margin-top:2rem;">
+    <a href="{% url 'blog:article_list' %}" class="back-btn">← Retour aux articles</a>
 </p>
 
 {# ----------------- Commentaires ----------------- #}
 <section class="comments">
-    <h2>Commentaires ({{ commentaires|length }})</h2>
+    <h2>💬 Commentaires ({{ commentaires|length }})</h2>
 
     {% for commentaire in commentaires %}
         <div class="comment">
             <p class="comment-head">
-                <strong>{{ commentaire.nom }}</strong>
+                <strong>👤 {{ commentaire.nom }}</strong>
                 <span class="comment-date">{{ commentaire.date_creation|date:"d/m/Y à H:i" }}</span>
             </p>
             <p>{{ commentaire.contenu|linebreaks }}</p>
@@ -32,7 +45,6 @@
         <p class="meta">Aucun commentaire pour le moment. Sois le premier ! 🚀</p>
     {% endfor %}
 
-    {# Formulaire d'ajout #}
     <h2 class="comment-form-title">Laisser un commentaire</h2>
 
     <form method="post" class="comment-form">
@@ -60,7 +72,7 @@
             {% if form.contenu.errors %}<div class="field-error">{{ form.contenu.errors }}</div>{% endif %}
         </div>
 
-        <button type="submit">Envoyer</button>
+        <button type="submit">Publier le commentaire</button>
     </form>
 </section>
 {% endblock %}

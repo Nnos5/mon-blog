@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Supprimer « {{ object.titre }} » — Mon Blog{% endblock %}
+
+{% block content %}
+<h1>Supprimer l'article</h1>
+
+<div class="comment-form" style="max-width:600px;">
+    <p>Es-tu sûr de vouloir supprimer l'article <strong>« {{ object.titre }} »</strong> ?</p>
+    <p class="meta">Cette action est définitive.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn-danger">Oui, supprimer</button>
+        <a href="{% url 'blog:article_detail' object.slug %}" class="back-btn" style="margin-left:1rem;">Annuler</a>
+    </form>
+</div>
+{% endblock %}

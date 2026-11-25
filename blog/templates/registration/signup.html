@@ -1,0 +1,30 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Inscription — Mon Blog{% endblock %}
+
+{% block content %}
+<h1>Créer un compte</h1>
+
+<form method="post" class="comment-form" style="max-width:450px;">
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+        <div class="form-errors">{{ form.non_field_errors }}</div>
+    {% endif %}
+
+    {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}<small class="help-text">{{ field.help_text|safe }}</small>{% endif %}
+            {% if field.errors %}<div class="field-error">{{ field.errors }}</div>{% endif %}
+        </div>
+    {% endfor %}
+
+    <button type="submit">S'inscrire</button>
+</form>
+
+<p style="margin-top:1.5rem;">
+    Déjà un compte ? <a href="{% url 'login' %}" style="color:#2980b9;">Se connecter</a>
+</p>
+{% endblock %}
