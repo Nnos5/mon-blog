@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Articles — Mon Blog{% endblock %}
+
+{% block content %}
+<h1>Articles</h1>
+
+{% if articles %}
+    {% for article in articles %}
+        <article style="background:#fff; padding:1.5rem; margin-bottom:1rem; border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+            <h2 style="margin-bottom:0.5rem;">
+                <a href="{% url 'blog:article_detail' article.slug %}" style="color:#2980b9; text-decoration:none;">
+                    {{ article.titre }}
+                </a>
+            </h2>
+            <p style="color:#7f8c8d; font-size:0.9rem; margin-bottom:1rem;">
+                Par {{ article.auteur }} · {{ article.date_publication|date:"d/m/Y" }}
+                {% if article.categorie %} · {{ article.categorie.nom }}{% endif %}
+            </p>
+            <p>{{ article.contenu|truncatewords:30 }}</p>
+        </article>
+    {% endfor %}
+{% else %}
+    <p>Aucun article pour le moment.</p>
+{% endif %}
+{% endblock %}
