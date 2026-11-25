@@ -16,6 +16,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-ta-cle-de-dev')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
+# Ajouter automatiquement le domaine Render
+if os.environ.get('RENDER_EXTERNAL_HOSTNAME'):
+    ALLOWED_HOSTS.append(os.environ['RENDER_EXTERNAL_HOSTNAME'])
 
 # ============================================
 # APPLICATIONS
