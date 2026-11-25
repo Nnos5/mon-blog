@@ -37,3 +37,23 @@ class Article(models.Model):
 
     def __str__(self):
         return self.titre
+
+class Commentaire(models.Model):
+    article = models.ForeignKey(
+        Article,
+        on_delete=models.CASCADE,
+        related_name='commentaires'
+    )
+    nom = models.CharField(max_length=100)
+    email = models.EmailField()
+    contenu = models.TextField()
+    date_creation = models.DateTimeField(auto_now_add=True)
+    approuve = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['-date_creation']
+        verbose_name = "commentaire"
+        verbose_name_plural = "commentaires"
+
+    def __str__(self):
+        return f"Commentaire de {self.nom} sur « {self.article.titre} »"

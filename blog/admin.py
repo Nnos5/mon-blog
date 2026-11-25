@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Categorie, Article
+from .models import Categorie, Article, Commentaire
 
 
 @admin.register(Categorie)
@@ -15,3 +15,9 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ('titre', 'contenu', 'auteur')
     prepopulated_fields = {'slug': ('titre',)}
     date_hierarchy = 'date_publication'
+
+@admin.register(Commentaire)
+class CommentaireAdmin(admin.ModelAdmin):
+    list_display = ('nom', 'article', 'date_creation', 'approuve')
+    list_filter = ('approuve' , 'date_creation')
+    search_filter = ('nom', 'email', 'contenu')

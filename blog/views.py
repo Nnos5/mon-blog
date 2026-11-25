@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import Article
+from .forms import CommentaireForm
 
 def article_list(request):
     query = request.GET.get('q', '').strip()
@@ -20,7 +21,7 @@ def article_list(request):
 
     return render(request, 'blog/article_list.html', {
         'page_obj': page_obj,
-        'query': query,          # 👈 LA ligne qui manquait
+        'query': query,          
     })
     query = request.GET.get('q', '').strip()
     articles = Article.objects.filter(publie=True)
@@ -43,4 +44,19 @@ def article_list(request):
 
 def article_detail(request, slug):
     article = get_object_or_404(Article, slug=slug, publie=True)
-    return render(request, 'blog/article_detail.html', {'article': article})
+    commentaires = article.commentaires.filter(approuve=True)
+    form = CommentaireForm()
+
+    if request.method == 'POST':
+        form = CommentaireForm(request.POST)
+        if form.is_valid():
+            commentaire = form.save(commit=False)
+            commentaire.article = article
+            commentaire.save()
+            return redirect('blog:article_detail', slug=article.slug)
+
+    return render(request, 'blog/article_detail.html', {
+        'article': article,
+        'commentaires': commentaires,
+        'form': form,
+    })
