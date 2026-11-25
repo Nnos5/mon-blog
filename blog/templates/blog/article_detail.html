@@ -3,6 +3,28 @@
 
 {% block title %}{{ article.titre }} — CAMBLOG{% endblock %}
 
+{# ---------- SEO / Open Graph spécifiques à l'article ---------- #}
+{% block meta_description %}{{ article.contenu|truncatewords:30 }}{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_title %}{{ article.titre }}{% endblock %}
+{% block og_description %}{{ article.contenu|truncatewords:30 }}{% endblock %}
+{% block twitter_title %}{{ article.titre }}{% endblock %}
+{% block twitter_description %}{{ article.contenu|truncatewords:30 }}{% endblock %}
+{% block og_image %}
+    {% if article.image %}
+        <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ article.image.url }}">
+    {% else %}
+        <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/article.jpg' %}">
+    {% endif %}
+{% endblock %}
+{% block twitter_image %}
+    {% if article.image %}
+        <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ article.image.url }}">
+    {% else %}
+        <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/article.jpg' %}">
+    {% endif %}
+{% endblock %}
+
 {% block content %}
 <article style="animation: none;">
     <h1 style="font-size:2rem;">{{ article.titre }}</h1>

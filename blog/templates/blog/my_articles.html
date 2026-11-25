@@ -1,0 +1,88 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Mes articles — CAMBLOG{% endblock %}
+
+{% block content %}
+<h1>Tableau de bord</h1>
+<p class="meta" style="margin-bottom:2rem;">
+    Connecté en tant que <strong>{{ user.username }}</strong>
+</p>
+
+{# Stats #}
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-value">{{ total_articles }}</div>
+        <div class="stat-label">Articles au total</div>
+    </div>
+    <div class="stat-card stat-success">
+        <div class="stat-value">{{ total_publies }}</div>
+        <div class="stat-label">Publiés</div>
+    </div>
+    <div class="stat-card stat-warning">
+        <div class="stat-value">{{ total_brouillons }}</div>
+        <div class="stat-label">Brouillons</div>
+    </div>
+    <div class="stat-card stat-info">
+        <div class="stat-value">{{ total_commentaires }}</div>
+        <div class="stat-label">Commentaires reçus</div>
+    </div>
+</div>
+
+<div style="margin: 2rem 0; text-align:right;">
+    <a href="{% url 'blog:article_create' %}" class="new-article-btn" style="padding:0.7rem 1.25rem;">
+        ➕ Écrire un nouvel article
+    </a>
+</div>
+
+{% if articles %}
+    <div class="articles-grid">
+        {% for article in articles %}
+            <article class="card">
+                {% if article.image %}
+                    <a href="{% url 'blog:article_detail' article.slug %}" class="card-image">
+                        <img src="{{ article.image.url }}" alt="{{ article.titre }}">
+                    </a>
+                {% else %}
+                    <a href="{% url 'blog:article_detail' article.slug %}" class="card-image card-image-placeholder">
+                        <img src="/static/images/article.jpg" alt="Image par défaut">
+                    </a>
+                {% endif %}
+                <div class="card-body">
+                    <h2 style="font-size:1.2rem;">
+                        <a href="{% url 'blog:article_detail' article.slug %}">{{ article.titre }}</a>
+                    </h2>
+                    <p class="meta" style="margin-bottom:1rem;">
+                        <span>📅 {{ article.date_publication|date:"d M Y" }}</span>
+                        {% if article.categorie %}
+                            <span>·</span>
+                            <span class="badge">{{ article.categorie.nom }}</span>
+                        {% endif %}
+                        {% if not article.publie %}
+                            <span class="badge" style="background:var(--accent);">Brouillon</span>
+                        {% endif %}
+                    </p>
+                    <div class="article-actions">
+                        <a href="{% url 'blog:article_update' article.slug %}" class="back-btn">✏️ Modifier</a>
+                        <a href="{% url 'blog:article_delete' article.slug %}" class="btn-danger-link">🗑️ Supprimer</a>
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+
+    <nav class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">← Précédent</a>
+        {% endif %}
+        <span>Page {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Suivant →</a>
+        {% endif %}
+    </nav>
+{% else %}
+    <div style="text-align:center; padding:3rem 1rem; color:var(--text-muted);">
+        <p style="font-size:1.2rem; margin-bottom:1rem;">📝 Tu n'as encore rien écrit.</p>
+        <p>Lance-toi ! Ton premier article n'attend que toi.</p>
+    </div>
+{% endif %}
+{% endblock %}

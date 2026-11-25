@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.db.models import Q
-from .models import Article, Categorie
+from .models import Article, Categorie, Commentaire
 from .forms import CommentaireForm, ArticleForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -140,13 +140,24 @@ class ArticleDeleteView(LoginRequiredMixin, DeleteView):
 class MyArticlesView(LoginRequiredMixin, ListView):
     template_name = 'blog/my_articles.html'
     context_object_name = 'articles'
-    paginate_by = 5
+    paginate_by = 6
 
     def get_queryset(self):
         return Article.objects.filter(auteur=self.request.user).order_by('-date_publication')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        articles_qs = Article.objects.filter(auteur=self.request.user)
+        context['total_articles'] = articles_qs.count()
+        context['total_publies'] = articles_qs.filter(publie=True).count()
+        context['total_brouillons'] = articles_qs.filter(publie=False).count()
+        context['total_commentaires'] = Commentaire.objects.filter(article__auteur=self.request.user).count()
+        return context
 
 class SignUpView(CreateView):
     form_class = SignUpForm
     template_name = 'registration/signup.html'
     success_url = reverse_lazy('login')
+
+def custom_404(request, exception):
+    return render(request, '404.html', status=404)

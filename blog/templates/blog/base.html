@@ -4,7 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{% block title %}CAMBLOG{% endblock %}</title>
+
+    <!-- SEO de base -->
+    <meta name="description" content="{% block meta_description %}CAMBLOG — Un espace pour penser, écrire et partager.{% endblock %}">
+    <meta name="author" content="CAMBLOG">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph (Facebook, LinkedIn, WhatsApp...) -->
+    <meta property="og:site_name" content="CAMBLOG">
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}CAMBLOG{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Un espace pour penser, écrire et partager.{% endblock %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:locale" content="fr_FR">
+    {% block og_image %}
+        <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/article.jpg' %}">
+    {% endblock %}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}CAMBLOG{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Un espace pour penser, écrire et partager.{% endblock %}">
+    {% block twitter_image %}
+        <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/article.jpg' %}">
+    {% endblock %}
+
+    <!-- Canonical -->
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -68,14 +97,14 @@
             <div class="footer-social">
                 <h4>Suivre</h4>
                 <div class="social-icons">
-                    
-                    <a href="https://github.com/Nnos5" title="GitHub" aria-label="GitHub">🐙</a>
+                    <a href="https://github.com/Nnos5" title="GitHub" aria-label="GitHub" target="_blank" rel="noopener">🐙</a>
                     <a href="mailto:ndeunas@gmail.com" title="Email" aria-label="Email">✉️</a>
+                </div>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <p>© 2026 CAMBLOG · 🌍 Un espace pour penser, écrire et partager.
+            <p>© 2026 CAMBLOG · 🌍 Un espace pour penser, écrire et partager.</p>
         </div>
     </footer>
 

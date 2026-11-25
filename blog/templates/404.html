@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Page introuvable — CAMBLOG{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="auth-card" style="text-align:center; max-width:550px;">
+        <h1 style="font-size:5rem; margin:0; background:linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">404</h1>
+        <h2 style="margin:0.5rem 0 1rem;">Oups, page introuvable</h2>
+        <p style="color:var(--text-muted); margin-bottom:2rem;">
+            La page que tu cherches n'existe pas ou a été déplacée.
+        </p>
+        <a href="{% url 'blog:article_list' %}" class="back-btn" style="font-size:1rem; padding:0.75rem 1.5rem;">
+            ← Retour à l'accueil
+        </a>
+    </div>
+</div>
+{% endblock %}
