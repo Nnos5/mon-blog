@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Connexion — Mon Blog{% endblock %}
+
+{% block content %}
+<h1>Connexion</h1>
+
+<form method="post" class="comment-form" style="max-width:400px;">
+    {% csrf_token %}
+
+    {% if form.errors %}
+        <div class="form-errors">Nom d'utilisateur ou mot de passe incorrect.</div>
+    {% endif %}
+
+    <div class="form-group">
+        <label for="{{ form.username.id_for_label }}">Nom d'utilisateur</label>
+        {{ form.username }}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.password.id_for_label }}">Mot de passe</label>
+        {{ form.password }}
+    </div>
+
+    <button type="submit">Se connecter</button>
+</form>
+{% endblock %}

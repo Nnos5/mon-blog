@@ -247,3 +247,40 @@ article h2 a:hover { text-decoration: underline; }
     padding: 0;
     margin: 0;
 }
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: #ecf0f1;
+    font-size: 0.95rem;
+}
+
+.user-nav a {
+    color: #ecf0f1;
+    text-decoration: none;
+}
+
+.user-nav a:hover {
+    text-decoration: underline;
+}
+
+.link-btn {
+    background: none;
+    border: none;
+    color: #ecf0f1;
+    cursor: pointer;
+    font-size: 0.95rem;
+    padding: 0;
+    text-decoration: underline;
+}
+
+.link-btn:hover {
+    color: #fff;
+}
