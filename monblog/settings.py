@@ -71,12 +71,23 @@ WSGI_APPLICATION = 'monblog.wsgi.application'
 # ============================================
 # BASE DE DONNÉES
 # ============================================
-DATABASES = {
-    'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600
-    )
-}
+if "DATABASE_URL" in os.environ:
+    # En production sur Render
+    DATABASES = {
+        "default": dj_database_url.config(
+            conn_max_age=600,
+            conn_health_checks=True,
+            ssl_require=True,  # Render exige SSL pour PostgreSQL [citation:5]
+        )
+    }
+else:
+    # En local uniquement
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 
 # ============================================
