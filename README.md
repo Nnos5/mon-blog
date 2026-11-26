@@ -207,17 +207,36 @@ python manage.py check
 
 # Lancer les tests
 python manage.py test
+Accéder à l'admin : http://127.0.0.1:8000/admin/
 
-# Accéder à l'admin
-http://127.0.0.1:8000/admin/
+📸 Captures d'écran
+Bientôt disponible...
 
-## 📸 Captures d'écran
+🤝 Contribution
+Les contributions sont les bienvenues ! Pour contribuer :
 
-### Page d'accueil (mode clair)
-![Page d'accueil](docs/screenshots/home-light.png)
+Fork le projet
 
-### Mode sombre
-![Mode sombre](docs/screenshots/home-dark.png)
+Crée une branche (git checkout -b feature/ma-fonctionnalite)
 
-### Tableau de bord
-![Dashboard](docs/screenshots/dashboard.png)
+Commit tes changements (git commit -m 'feat: add ma fonctionnalite')
+
+Push (git push origin feature/ma-fonctionnalite)
+
+Ouvre une Pull Request
+
+📝 Licence
+Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+
+👤 Auteur
+Nnos5
+
+🐙 GitHub : @Nnos5
+
+📧 Email : ndeunas@gmail.com
+
+<div align="center">
+⭐ Si ce projet t'a plu, n'hésite pas à lui donner une étoile !
+Fait avec ❤️ et beaucoup de ☕
+
+</div> ```
