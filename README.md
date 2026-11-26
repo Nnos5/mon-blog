@@ -210,7 +210,14 @@ python manage.py test
 
 # Accéder à l'admin
 http://127.0.0.1:8000/admin/
-📸 Captures d'écran
 
-À ajouter : screenshots de la page d'accueil, du dashboard, du mode somebre, etc.
+## 📸 Captures d'écran
 
+### Page d'accueil (mode clair)
+![Page d'accueil](docs/screenshots/home-light.png)
+
+### Mode sombre
+![Mode sombre](docs/screenshots/home-dark.png)
+
+### Tableau de bord
+![Dashboard](docs/screenshots/dashboard.png)
